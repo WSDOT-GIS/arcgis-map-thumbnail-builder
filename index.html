@@ -19,11 +19,16 @@
 				async: true,
 				gfxRenderer: "canvas", // Renders graphics layers as canvas elements instead of SVG.
 				packages: [
-				{
-					name: "layerFactory",
-					location: root + "Script",
-					main: "layerFactory"
-				}
+					{
+						name: "layerFactory",
+						location: root + "Script",
+						main: "layerFactory"
+					},
+					{
+						name: "map-to-canvas",
+						location: root + "Script",
+						main: "map-to-canvas"
+					}
 				]
 			}
 			window.dojoConfig = dojoConfig;

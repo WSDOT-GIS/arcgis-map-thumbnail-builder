@@ -1,11 +1,11 @@
-﻿/*global require, html2canvas*/
+﻿/*global require */
 
 require([
 	"esri/map",
 	"esri/layers/ArcGISTiledMapServiceLayer",
 	"layerFactory",
-	"//cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"
-], function (Map, ArcGISTiledMapServiceLayer, LayerFactory) {
+	"map-to-canvas"
+], function (Map, ArcGISTiledMapServiceLayer, LayerFactory, mapToCanvas) {
 	function addLayerToList(layerInfo) {
 		var ul = document.getElementById("layersList");
 		var layer = layerInfo.layer;
@@ -15,14 +15,8 @@ require([
 	}
 
 	function takeScreenshot() {
-		html2canvas(document.getElementById("map"), {
-			useCORS: true,
-			width: 200,
-			height: 133,
-			onrendered: function (canvas) {
-				document.body.appendChild(canvas);
-			}
-		});
+		var canvas = mapToCanvas(map);
+		document.body.appendChild(canvas);
 	}
 
 	var map, bgLayer, layerFactory;

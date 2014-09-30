@@ -68,6 +68,7 @@
     <Content Include="index.html" />
     <Content Include="Script\index.js" />
     <Content Include="Script\layerFactory.js" />
+    <Content Include="Script\map-to-canvas.js" />
     <Content Include="Styles\index.css" />
     <Content Include="Web.config" />
   </ItemGroup>
