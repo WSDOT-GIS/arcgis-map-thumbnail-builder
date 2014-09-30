@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>Map</title>
+	<link href="//js.arcgis.com/3.10compact/js/esri/css/esri.css" rel="stylesheet" />
+	<link href="Styles/index.css" rel="stylesheet" />
+</head>
+<body>
+	<div id="map"></div>
+	<form id="addLayerForm">
+		<input id="layerUrl" type="url" name="url" value="" required="required" placeholder="Enter map service URL" />
+		<button type="submit">Add Layer</button>
+	</form>
+	<ul id="layersList"></ul>
+	<button id="screenshotButton" type="button">Take Screenshot</button>
+	<script>
+		(function (root) {
+			var dojoConfig = {
+				async: true,
+				gfxRenderer: "canvas", // Renders graphics layers as canvas elements instead of SVG.
+				packages: [
+				{
+					name: "layerFactory",
+					location: root + "Script",
+					main: "layerFactory"
+				}
+				]
+			}
+			window.dojoConfig = dojoConfig;
+		}([location.origin, location.pathname.replace(/[^\/]+$/, "")].join("")));
+	</script>
+	<script src="//js.arcgis.com/3.10compact/"></script>
+	<script src="Script/index.js"></script>
+</body>
+</html>
