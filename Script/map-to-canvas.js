@@ -50,7 +50,7 @@ define(["dojo/Deferred", "dojo/promise/all"], function (Deferred, all) {
 					f: "image",
 					size: [map.width, map.height].join(","),
 					bbox: [map.extent.xmin, map.extent.ymin, map.extent.xmax, map.extent.ymax].join(","),
-					bboxSR: map.extent.wkid,
+					bboxSR: map.extent.spatialReference.wkid,
 					format: "png",
 					transparent: true
 				};
