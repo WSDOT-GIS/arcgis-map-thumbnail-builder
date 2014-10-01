@@ -22,12 +22,18 @@ define(["dojo/Deferred", "dojo/promise/all"], function (Deferred, all) {
 	 * @param {HTMLCanvasElement} canvas
 	 */
 	function mapToCanvas(map, canvas) {
+		var ctx;
 		if (!canvas) {
 			canvas = document.createElement("canvas");
-			canvas.width = map.width;
-			canvas.height = map.height;
+		} else {
+			ctx = canvas.getContext("2d");
+			ctx.clearRect(0,0,canvas.width, canvas.height);
 		}
-		var ctx = canvas.getContext("2d");
+		canvas.width = map.width;
+		canvas.height = map.height;
+		if (!ctx) {
+			ctx = canvas.getContext("2d");
+		}
 		var requests = [];
 
 		// Loop through map layers

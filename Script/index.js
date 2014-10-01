@@ -6,17 +6,19 @@ require([
 	"layerFactory",
 	"map-to-canvas"
 ], function (Map, ArcGISTiledMapServiceLayer, LayerFactory, mapToCanvas) {
+
 	function addLayerToList(layerInfo) {
 		var ul = document.getElementById("layersList");
 		var layer = layerInfo.layer;
 		var li = document.createElement("li");
+		li.dataset.layerId = layerInfo.layer.id;
 		li.textContent = layer.url;
 		ul.appendChild(li);
 	}
 
 	function takeScreenshot() {
-		var canvas = mapToCanvas(map);
-		document.body.appendChild(canvas);
+		var canvas = document.getElementById("screenshotCanvas");
+		mapToCanvas(map, canvas);
 	}
 
 	var map, bgLayer, layerFactory;

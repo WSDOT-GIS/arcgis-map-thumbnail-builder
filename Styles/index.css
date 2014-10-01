@@ -1,7 +1,32 @@
-﻿#map {
+﻿body {
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#map {
 	width: 200px;
 	height: 133px;
 }
 [type='url'] {
-	width: 100%;
+	width: 80%;
+}
+
+.container {
+	display: block;
+	display: flex;
+	align-items: center;
+}
+
+.container p {
+	margin: 0;
+	text-align: center;
+}
+
+#screenshotButton {
+	font-family: 'Segoe UI Emoji', 'Segoe UI Symbol', 'Symbola';
+	font-size: 3em;
+	border-radius: 10px;
+}
+
+#screenshotCanvas {
+	border: 10px ridge goldenrod;
 }

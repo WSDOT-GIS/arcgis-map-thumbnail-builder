@@ -6,13 +6,22 @@
 	<link href="Styles/index.css" rel="stylesheet" />
 </head>
 <body>
-	<div id="map"></div>
-	<form id="addLayerForm">
-		<input id="layerUrl" type="url" name="url" value="" required="required" placeholder="Enter map service URL" />
-		<button type="submit">Add Layer</button>
-	</form>
-	<ul id="layersList"></ul>
-	<button id="screenshotButton" type="button">Take Screenshot</button>
+	<div class="container">
+		<div id="map"></div>
+		<div><button id="screenshotButton" type="button">📷</button></div>
+		<div>
+			<canvas id="screenshotCanvas" width="200" height="133"></canvas>
+			<p>Right-click on the image to save.</p>
+		</div>
+	</div>
+
+	<div>
+		<form id="addLayerForm">
+			<input id="layerUrl" type="url" name="url" value="" required="required" placeholder="Enter map service URL" />
+			<button type="submit">Add Layer</button>
+		</form>
+		<ul id="layersList"></ul>
+	</div>
 	<script>
 		(function (root) {
 			var dojoConfig = {
