@@ -3,6 +3,10 @@ ArcGIS Map thumbnail builder
 
 Exports an image of an [ArcGIS API for JavaScript] map.
 
+## Demo ##
+
+http://wsdot-gis.github.io/arcgis-map-thumbnail-builder/
+
 ## Limitations ##
 
 * There does not currently seem to be a way for Internet Explorer users to save the image displayed in the canvas, whereas Chrome and Firefox users can either right-click on the canvas or click the link below the canvas to save the image.
