@@ -6,6 +6,9 @@
 	<link href="Styles/index.css" rel="stylesheet" />
 </head>
 <body>
+	<header>
+		<a href="https://github.com/WSDOT-GIS/arcgis-map-thumbnail-builder/">View source on GitHub</a>
+	</header>
 	<div class="container">
 		<div id="map"></div>
 		<div><button id="screenshotButton" type="button">📷</button></div>
@@ -17,7 +20,8 @@
 
 	<div>
 		<form id="addLayerForm">
-			<input id="layerUrl" type="url" name="url" value="" required="required" placeholder="Enter map service URL" />
+			<input id="layerUrl" type="url" name="url" value="" required="required"
+				    placeholder="http://www.example.com/ArcGIS/rest/services/ServiceFolder/ServiceName/MapServer" />
 			<button type="submit">Add Layer</button>
 		</form>
 		<ul id="layersList"></ul>

@@ -59,9 +59,6 @@ require([
 	map.on("layer-add", addLayerToList);
 
 	map.addLayer(bgLayer);
-	layerFactory.createLayer({
-		url: "http://services.arcgis.com/IYrj3otxNjPsrTRD/arcgis/rest/services/WSDOTAccessControl/FeatureServer/0"
-	});
 
 	var screenshotButton = document.getElementById("screenshotButton");
 	screenshotButton.addEventListener("click", takeScreenshot);
