@@ -30,3 +30,30 @@
 #screenshotCanvas {
 	border: 10px ridge goldenrod;
 }
+
+.github-link {
+	position: absolute;
+	top: 21px;
+	right: -60px;
+	background-color: darkgreen;
+	text-align: center;
+	padding: 0.5em 3em;
+	-moz-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+	transform: rotate(45deg);
+}
+
+.github-link:hover {
+	background-color: lightgreen;
+}
+
+.github-link a {
+	text-decoration: none;
+	color: white;
+}
+
+.github-link:hover a {
+	color: gray;
+}

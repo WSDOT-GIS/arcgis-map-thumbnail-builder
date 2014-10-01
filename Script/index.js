@@ -6,16 +6,59 @@ require([
 	"layerFactory",
 	"map-to-canvas"
 ], function (Map, ArcGISTiledMapServiceLayer, LayerFactory, mapToCanvas) {
+	"use strict";
 
+	/**
+	 * When a layer list item's delete button is clicked, this function
+	 * will remove the associated layer from the map and then
+	 * remove the list item from the list.
+	 * @param {Event} evt - Button click event
+	 */
+	function deleteLayer(evt) {
+		var button = evt.target; // The button that was clicked.
+		var layerId = button.dataset.layerId;
+		var layer = map.getLayer(layerId);
+		// Remove the layer from the map.
+		map.removeLayer(layer);
+		// Remove list item from ul.
+		var li = button.parentElement;
+		li.parentElement.removeChild(li);
+	}
+
+	/**
+	 * Adds a layer to an HTML list.
+	 * @param {Object} layerInfo
+	 * @param {esri/layers/Layer} layerInfo.layer - Layer that was added to the map.
+	 */
 	function addLayerToList(layerInfo) {
-		var ul = document.getElementById("layersList");
-		var layer = layerInfo.layer;
-		var li = document.createElement("li");
-		li.setAttribute("data-layer-id", layerInfo.layer.id);
+		var ul, layer, li, deleteButton;
+		// Get the list that will have a list item added to it.
+		ul = document.getElementById("layersList");
+		// Get the layer that was added to the map.
+		layer = layerInfo.layer;
+		// Create a list item associated with the added layer.
+		li = document.createElement("li");
+		// Create a button that will allow the user to remove the layer from
+		// the map along with the associated list item.
+		deleteButton = document.createElement("button");
+		deleteButton.type = "button";
+		deleteButton.textContent = "Delete";
+		deleteButton.title = "Remove this layer from the map.";
+		// Add data attribute with the layer's ID to the delete button and list item.
+		[deleteButton, li].forEach(function (el) {
+			el.setAttribute("data-layer-id", layerInfo.layer.id);
+		});
+		// Attach the delete button click event handler.
+		deleteButton.addEventListener("click", deleteLayer);
 		li.textContent = layer.url;
+		li.appendChild(deleteButton);
 		ul.appendChild(li);
 	}
 
+	/**
+	 * Adds images of map layers to the canvas element.
+	 * Updates the data URL link to the image currently displayed in the canvas.
+	 */
 	function takeScreenshot() {
 		var canvas = document.getElementById("screenshotCanvas");
 		mapToCanvas(map, canvas).then(function () {
@@ -36,6 +79,7 @@ require([
 
 	layerFactory = new LayerFactory();
 
+	// Add layer to the map once created by the LayerFactory.
 	layerFactory.on("layer-create", function (response) {
 		if (response.layer) {
 			map.addLayer(response.layer);
@@ -44,6 +88,7 @@ require([
 		}
 	});
 
+	// Create the layer from the user-specified URL.
 	document.forms.addLayerForm.onsubmit = function () {
 		console.log("url", this.layerUrl.value);
 		layerFactory.createLayer({
@@ -52,11 +97,6 @@ require([
 
 		return false;
 	};
-
-
-	bgLayer = new ArcGISTiledMapServiceLayer("http://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer", {
-		useMapImage: true
-	});
 
 	map = new Map("map", {
 		center: [-120.80566406246835, 47.41322033015946],
@@ -69,6 +109,7 @@ require([
 
 	map.on("layer-add", addLayerToList);
 
+	bgLayer = new ArcGISTiledMapServiceLayer("http://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer");
 	map.addLayer(bgLayer);
 
 	var screenshotButton = document.getElementById("screenshotButton");
