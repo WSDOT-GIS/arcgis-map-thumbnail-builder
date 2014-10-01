@@ -11,14 +11,25 @@ require([
 		var ul = document.getElementById("layersList");
 		var layer = layerInfo.layer;
 		var li = document.createElement("li");
-		li.dataset.layerId = layerInfo.layer.id;
+		li.setAttribute("data-layer-id", layerInfo.layer.id);
 		li.textContent = layer.url;
 		ul.appendChild(li);
 	}
 
 	function takeScreenshot() {
 		var canvas = document.getElementById("screenshotCanvas");
-		mapToCanvas(map, canvas);
+		mapToCanvas(map, canvas).then(function () {
+			// Update the data URL.
+			var url;
+			try {
+				url = canvas.toDataURL();
+			} catch (e) {
+				console.log("Error generating image URL", e.message);
+			}
+			if (url) {
+				document.getElementById("dataLink").href = url;
+			}
+		});
 	}
 
 	var map, bgLayer, layerFactory;

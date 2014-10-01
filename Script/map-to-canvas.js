@@ -23,12 +23,10 @@ define(["dojo/Deferred", "dojo/promise/all"], function (Deferred, all) {
 	 */
 	function mapToCanvas(map, canvas) {
 		var ctx;
-		if (!canvas) {
-			canvas = document.createElement("canvas");
-		} else {
-			ctx = canvas.getContext("2d");
-			ctx.clearRect(0,0,canvas.width, canvas.height);
-		}
+		ctx = canvas.getContext("2d");
+		// Clear any existing data from the canvas.
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+
 		canvas.width = map.width;
 		canvas.height = map.height;
 		if (!ctx) {
@@ -59,6 +57,7 @@ define(["dojo/Deferred", "dojo/promise/all"], function (Deferred, all) {
 				url = url.replace("//export", "/export");
 
 				image = new Image(map.width, map.height);
+				image.crossOrigin = "anonymous";
 				requests.push(deferred);
 				image.addEventListener("load", function () {
 					// ctx.drawImage(image, 0, 0);
@@ -71,7 +70,7 @@ define(["dojo/Deferred", "dojo/promise/all"], function (Deferred, all) {
 		});
 
 		// Once all of the images have loaded, add them to the canvas.
-		all(requests).then(function (images) {
+		return all(requests).then(function (images) {
 			images.forEach(function (image) {
 				ctx.drawImage(image, 0, 0);
 			});
@@ -83,12 +82,8 @@ define(["dojo/Deferred", "dojo/promise/all"], function (Deferred, all) {
 				tempCanvas = canvases[i];
 				ctx.drawImage(tempCanvas, 0, 0);
 			}
+			ctx.save();
 		});
-
-
-
-
-		return canvas;
 	}
 
 	return mapToCanvas;
