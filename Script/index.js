@@ -3,9 +3,11 @@
 require([
 	"esri/map",
 	"esri/layers/ArcGISTiledMapServiceLayer",
+	"esri/arcgis/utils",
+	"dojo/Deferred",
 	"layerFactory",
-	"map-to-canvas"
-], function (Map, ArcGISTiledMapServiceLayer, LayerFactory, mapToCanvas) {
+	"map-to-canvas",
+], function (Map, ArcGISTiledMapServiceLayer, arcgisUtils, Deferred, LayerFactory, mapToCanvas) {
 	"use strict";
 
 	/**
@@ -68,6 +70,7 @@ require([
 				url = canvas.toDataURL();
 			} catch (e) {
 				console.log("Error generating image URL", e.message);
+				alert(e.message);
 			}
 			if (url) {
 				document.getElementById("dataLink").href = url;
@@ -75,7 +78,48 @@ require([
 		});
 	}
 
-	var map, bgLayer, layerFactory;
+	var map, layerFactory;
+
+	/**
+	 * Creates the map.
+	 */
+	function createMap(mapId) {
+		// If caller needs to alter map, this function will need to be modified to return a Promise.
+		var bgLayer, output, domId = "map", mapOptions;
+
+		mapOptions = {
+			center: [-120.80566406246835, 47.41322033015946],
+			zoom: 5,
+			showAttribution: false,
+			showInfoWindowOnClick: false,
+			slider: false,
+			logo: false
+		};
+
+		if (mapId) {
+			delete mapOptions.center;
+			delete mapOptions.zoom;
+			output = arcgisUtils.createMap(mapId, domId, {
+				mapOptions: mapOptions
+			}).then(function (response) {
+				map = response.map;
+				map.on("layer-add", addLayerToList);
+			}, function (error) {
+				console.log("Create map error", error);
+			});
+		} else {
+			output = new Deferred();
+			map = new Map(domId, mapOptions);
+			output.resolve({ map: map });
+
+
+			bgLayer = new ArcGISTiledMapServiceLayer("http://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer");
+			map.addLayer(bgLayer);
+			map.on("layer-add", addLayerToList);
+		}
+		return output;
+	}
+
 
 	layerFactory = new LayerFactory();
 
@@ -98,19 +142,21 @@ require([
 		return false;
 	};
 
-	map = new Map("map", {
-		center: [-120.80566406246835, 47.41322033015946],
-		zoom: 5,
-		showAttribution: false,
-		showInfoWindowOnClick: false,
-		slider: false,
-		logo: false
-	});
+	/**
+	 * Gets the id parameter from the query string. Returns null if there is no such parameter.
+	 * @returns {(string|null)}
+	 */
+	function getMapIdFromQueryString() {
+		var re = /webmap=([^&]+)/i, match;
+		if (document.location.search) {
+			match = document.location.search.match(re);
+		}
+		return match ? decodeURIComponent(match[1]) : null;
+	}
 
-	map.on("layer-add", addLayerToList);
+	getMapIdFromQueryString();
 
-	bgLayer = new ArcGISTiledMapServiceLayer("http://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer");
-	map.addLayer(bgLayer);
+	map = createMap(getMapIdFromQueryString());
 
 	var screenshotButton = document.getElementById("screenshotButton");
 	screenshotButton.addEventListener("click", takeScreenshot);
