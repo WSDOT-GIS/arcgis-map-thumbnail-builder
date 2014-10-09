@@ -103,6 +103,10 @@ require([
 				mapOptions: mapOptions
 			}).then(function (response) {
 				map = response.map;
+				// Add existing layers to list
+				map.layerIds.forEach(function (layerId) {
+					addLayerToList({ layer: map.getLayer(layerId) });
+				});
 				map.on("layer-add", addLayerToList);
 			}, function (error) {
 				console.log("Create map error", error);
