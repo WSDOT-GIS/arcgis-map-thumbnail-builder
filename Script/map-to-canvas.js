@@ -43,7 +43,7 @@ define(["dojo/Deferred", "dojo/promise/all"], function (Deferred, all) {
 
 			layer = map.getLayer(layerId);
 
-			if (layer.url) {
+			if (layer.url && layer.visibleAtMapScale) {
 				// Create Deferred for current image loading.
 				deferred = new Deferred();
 				// Setup map service image export parameters.
@@ -71,6 +71,12 @@ define(["dojo/Deferred", "dojo/promise/all"], function (Deferred, all) {
 				image.addEventListener("load", function () {
 					deferred.resolve(image);
 				}, false);
+				image.addEventListener("error", function (errorEvent) {
+					deferred.reject({
+						error: errorEvent,
+						image: image
+					});
+				});
 				// Set the image's src attribute. This will begin the image loading.
 				image.src = url;
 			} else {
@@ -97,6 +103,9 @@ define(["dojo/Deferred", "dojo/promise/all"], function (Deferred, all) {
 			}
 			// Save the canvas image. (This allows the user to revert this version if further changes are made.)
 			ctx.save();
+		}, function (error) {
+			console.error(error);
+			alert("Error creating thumbnail.");
 		});
 	}
 

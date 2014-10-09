@@ -33,7 +33,7 @@ require([
 	 * @param {esri/layers/Layer} layerInfo.layer - Layer that was added to the map.
 	 */
 	function addLayerToList(layerInfo) {
-		var ul, layer, li, deleteButton;
+		var ul, layer, li, a, deleteButton;
 		// Get the list that will have a list item added to it.
 		ul = document.getElementById("layersList");
 		// Get the layer that was added to the map.
@@ -52,7 +52,11 @@ require([
 		});
 		// Attach the delete button click event handler.
 		deleteButton.addEventListener("click", deleteLayer);
-		li.textContent = layer.url;
+
+		a = document.createElement("a");
+		a.href = layer.url;
+		a.textContent = layer.url;
+		li.appendChild(a);
 		li.appendChild(deleteButton);
 		ul.appendChild(li);
 	}
@@ -97,14 +101,17 @@ require([
 		};
 
 		if (mapId) {
+			// Web map will have predefined extent. Remove options that would override this.
 			delete mapOptions.center;
 			delete mapOptions.zoom;
+
+			// Create the webmap.
 			output = arcgisUtils.createMap(mapId, domId, {
 				mapOptions: mapOptions
 			}).then(function (response) {
 				map = response.map;
-				// Add existing layers to list
-				map.layerIds.forEach(function (layerId) {
+				// Add existing layers to list.
+				map.layerIds.concat(map.graphicsLayerIds).forEach(function (layerId) {
 					addLayerToList({ layer: map.getLayer(layerId) });
 				});
 				map.on("layer-add", addLayerToList);
@@ -160,7 +167,7 @@ require([
 
 	getMapIdFromQueryString();
 
-	map = createMap(getMapIdFromQueryString());
+	createMap(getMapIdFromQueryString());
 
 	var screenshotButton = document.getElementById("screenshotButton");
 	screenshotButton.addEventListener("click", takeScreenshot);
