@@ -1,59 +1,59 @@
 ﻿body {
-	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Lato", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 #map {
-	width: 200px;
-	height: 133px;
+  width: 200px;
+  height: 133px;
 }
-[type='url'] {
-	width: 80%;
+[type="url"] {
+  width: 80%;
 }
 
 .container {
-	display: block;
-	display: flex;
-	align-items: center;
+  display: block;
+  display: flex;
+  align-items: center;
 }
 
 .container p {
-	margin: 0;
-	text-align: center;
+  margin: 0;
+  text-align: center;
 }
 
 #screenshotButton {
-	font-family: 'Segoe UI Emoji', 'Segoe UI Symbol', 'Symbola';
-	font-size: 3em;
-	border-radius: 10px;
+  font-family: "Segoe UI Emoji", "Segoe UI Symbol", "Symbola";
+  font-size: 3em;
+  border-radius: 10px;
 }
 
 #screenshotCanvas {
-	border: 10px ridge goldenrod;
+  border: 10px ridge goldenrod;
 }
 
 .github-link {
-	position: absolute;
-	top: 21px;
-	right: -60px;
-	background-color: darkgreen;
-	text-align: center;
-	padding: 0.5em 3em;
-	-moz-transform: rotate(45deg);
-	-ms-transform: rotate(45deg);
-	-o-transform: rotate(45deg);
-	-webkit-transform: rotate(45deg);
-	transform: rotate(45deg);
+  position: absolute;
+  top: 21px;
+  right: -60px;
+  background-color: darkgreen;
+  text-align: center;
+  padding: 0.5em 3em;
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
 }
 
 .github-link:hover {
-	background-color: lightgreen;
+  background-color: lightgreen;
 }
 
 .github-link a {
-	text-decoration: none;
-	color: white;
+  text-decoration: none;
+  color: white;
 }
 
 .github-link:hover a {
-	color: gray;
+  color: gray;
 }

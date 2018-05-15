@@ -1,51 +1,57 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
-<head>
-	<title>Thumbnail Builder</title>
-	<link href="//js.arcgis.com/3.11compact/esri/css/esri.css" rel="stylesheet" />
-	<link href="Styles/index.css" rel="stylesheet" />
-</head>
-<body>
-	<p class="github-link"><a href="https://github.com/WSDOT-GIS/arcgis-map-thumbnail-builder/" target="_blank">Fork me on GitHub</a></p>
-	<div class="container">
-		<div id="map"></div>
-		<div><button id="screenshotButton" type="button">📷</button></div>
-		<div>
-			<canvas id="screenshotCanvas" width="200" height="133"></canvas>
-			<p><a id="dataLink" href="#" target="_blank">link</a></p>
-		</div>
-	</div>
 
-	<div>
-		<form id="addLayerForm">
-			<input id="layerUrl" type="url" name="url" autocomplete="on" required="required"
-				    placeholder="http://www.example.com/ArcGIS/rest/services/ServiceFolder/ServiceName/MapServer" />
-			<button type="submit">Add Layer</button>
-		</form>
-		<ul id="layersList"></ul>
-	</div>
-	<script>
-		(function (root) {
-			var dojoConfig = {
-				async: true,
-				gfxRenderer: "canvas", // Renders graphics layers as canvas elements instead of SVG.
-				packages: [
-					{
-						name: "layerFactory",
-						location: root + "Script",
-						main: "layerFactory"
-					},
-					{
-						name: "map-to-canvas",
-						location: root + "Script",
-						main: "map-to-canvas"
-					}
-				]
-			}
-			window.dojoConfig = dojoConfig;
-		}([location.origin, location.pathname.replace(/[^\/]+$/, "")].join("")));
-	</script>
-	<script src="//js.arcgis.com/3.11compact/"></script>
-	<script src="Script/index.js"></script>
+<head>
+    <title>Thumbnail Builder</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <link rel="stylesheet" href="https://js.arcgis.com/3.24compact/esri/css/esri.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" >
+    <link href="Styles/index.css" rel="stylesheet" />
+</head>
+
+<body>
+    <p class="github-link">
+        <a href="https://github.com/WSDOT-GIS/arcgis-map-thumbnail-builder/" target="_blank">Fork me on GitHub</a>
+    </p>
+    <div class="container">
+        <div id="map"></div>
+        <div>
+            <button id="screenshotButton" type="button">📷</button>
+        </div>
+        <div>
+            <canvas id="screenshotCanvas" width="200" height="133"></canvas>
+            <p>
+                <a id="dataLink" href="#" target="_blank">link</a>
+            </p>
+        </div>
+    </div>
+
+    <div>
+        <form id="addLayerForm">
+            <input id="layerUrl" type="url" name="url" autocomplete="on" required="required" placeholder="http://www.example.com/ArcGIS/rest/services/ServiceFolder/ServiceName/MapServer"
+            />
+            <button type="submit">Add Layer</button>
+        </form>
+        <ul id="layersList"></ul>
+    </div>
+    <script>
+        (function (root) {
+            var dojoConfig = {
+                async: true,
+                gfxRenderer: "canvas", // Renders graphics layers as canvas elements instead of SVG.
+                packages: [
+                    {
+                        name: "app",
+                        location: root + "Script"
+                    },
+
+                ]
+            }
+            window.dojoConfig = dojoConfig;
+        }([location.origin, location.pathname.replace(/[^\/]+$/, "")].join("")));
+    </script>
+    <script src="https://js.arcgis.com/3.24compact/init.js" integrity="sha384-ISSJDz6pYsxrhGPCtqAk/eUh87TwhqLE7jvlUkTVI9ikIDdp4rKGbsqS2Gq14k1k" crossorigin="anonymous"></script>
+    <script>require(["app"]);</script>
 </body>
+
 </html>
