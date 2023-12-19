@@ -1,11 +1,14 @@
-﻿body {
+﻿@import url("https://js.arcgis.com/4.28/esri/themes/light/main.css");
+
+body {
   font-family: "Lato", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 #map {
-  width: 200px;
-  height: 133px;
+  width: 600px;
+  height: 400px;
 }
+
 [type="url"] {
   width: 80%;
 }

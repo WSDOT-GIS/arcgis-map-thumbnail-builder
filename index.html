@@ -4,9 +4,6 @@
 <head>
     <title>Thumbnail Builder</title>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-    <link rel="stylesheet" href="https://js.arcgis.com/3.24compact/esri/css/esri.css">
-    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" >
-    <link href="Styles/index.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -19,10 +16,10 @@
             <button id="screenshotButton" type="button">📷</button>
         </div>
         <div>
-            <canvas id="screenshotCanvas" width="200" height="133"></canvas>
-            <p>
+            <canvas id="screenshotCanvas" width="600" height="400"></canvas>
+            <!-- <p>
                 <a id="dataLink" href="#" target="_blank">link</a>
-            </p>
+            </p> -->
         </div>
     </div>
 
@@ -34,24 +31,7 @@
         </form>
         <ul id="layersList"></ul>
     </div>
-    <script>
-        (function (root) {
-            var dojoConfig = {
-                async: true,
-                gfxRenderer: "canvas", // Renders graphics layers as canvas elements instead of SVG.
-                packages: [
-                    {
-                        name: "app",
-                        location: root + "Script"
-                    },
-
-                ]
-            }
-            window.dojoConfig = dojoConfig;
-        }([location.origin, location.pathname.replace(/[^\/]+$/, "")].join("")));
-    </script>
-    <script src="https://js.arcgis.com/3.24compact/init.js" integrity="sha384-ISSJDz6pYsxrhGPCtqAk/eUh87TwhqLE7jvlUkTVI9ikIDdp4rKGbsqS2Gq14k1k" crossorigin="anonymous"></script>
-    <script>require(["app"]);</script>
+    <script type="module" src="./src/main.ts"></script>
 </body>
 
 </html>
