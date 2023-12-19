@@ -1,0 +1,8 @@
+# Custom Dictionary Words
+arcgis
+lato
+wkid
+xmax
+xmin
+ymax
+ymin

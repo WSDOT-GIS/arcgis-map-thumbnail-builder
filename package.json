@@ -1,13 +1,16 @@
 {
   "name": "arcgis-map-thumbnail-builder",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Generates thumbnail images from ArcGIS Online web maps.",
   "main": "index.html",
-  "scripts": {
-    "prepare": "webpack",
-    "start": "webpack-dev-server --open"
-  },
   "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "vitest run"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/WSDOT-GIS/arcgis-map-thumbnail-builder.git"
@@ -24,19 +27,19 @@
     "url": "https://github.com/WSDOT-GIS/arcgis-map-thumbnail-builder/issues"
   },
   "homepage": "https://github.com/WSDOT-GIS/arcgis-map-thumbnail-builder#readme",
-  "dependencies": {},
   "devDependencies": {
-    "@types/arcgis-js-api": "^3.24.0",
-    "@types/dojo": "^1.9.40",
-    "awesome-typescript-loader": "^5.0.0",
-    "hard-source-webpack-plugin": "^0.6.7",
-    "prettier": "^1.12.1",
-    "tslint": "^5.10.0",
-    "tslint-config-prettier": "^1.12.0",
-    "tslint-plugin-prettier": "^1.3.0",
-    "typescript": "^2.8.3",
-    "webpack": "^4.8.3",
-    "webpack-cli": "^5.0.1",
-    "webpack-dev-server": "^3.1.4"
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/parser": "^6.15.0",
+    "browserslist-to-esbuild": "^1.2.0",
+    "cspell": "^8.2.0",
+    "eslint": "^8.56.0",
+    "prettier": "^3.1.1",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.10",
+    "vitest": "^1.1.0"
+  },
+  "dependencies": {
+    "@arcgis/core": "^4.28.10",
+    "@fontsource/lato": "^5.0.18"
   }
 }
