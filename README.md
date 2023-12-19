@@ -15,12 +15,6 @@ You can initialize the map with a web map using the web map parameter.
 
 	http://example.com/arcgis-map-thumbnail-builder/?webmap=yourwebmapid
 
-## Limitations ##
-
-* There does not currently seem to be a way for Internet Explorer users to save the image displayed in the canvas, whereas Chrome and Firefox users can either right-click on the canvas or click the link below the canvas to save the image.
-
-	This IE issue may be CORS related. It may be possible to work around it by using a proxy to call remote resources.
-
 ## Modules ##
 
 ### map-to-canvas ###
