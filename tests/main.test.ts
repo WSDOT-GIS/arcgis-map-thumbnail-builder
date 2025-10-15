@@ -4,13 +4,13 @@ import { getMapIdFromQueryString } from "../src/utils.js";
 describe("getMapIdFromQueryString", () => {
   test("extracts webmap when present and correctly cased", () => {
     expect(getMapIdFromQueryString("http://example.com?webmap=123")).toBe(
-      "123"
+      "123",
     );
   });
 
   test("is case-insensitive to webmap", () => {
     expect(getMapIdFromQueryString("http://example.com?WEBMAP=abc")).toBe(
-      "abc"
+      "abc",
     );
   });
 
@@ -20,7 +20,7 @@ describe("getMapIdFromQueryString", () => {
 
   test("accepts URL as a string", () => {
     expect(getMapIdFromQueryString("http://example.com?webmap=string")).toBe(
-      "string"
+      "string",
     );
   });
 

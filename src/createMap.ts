@@ -8,7 +8,7 @@
 export async function createMap() {
   // Attempt to retrieve a webmap ID from the URL query string
   const webmapId = await import("./utils").then(({ getMapIdFromQueryString }) =>
-    getMapIdFromQueryString()
+    getMapIdFromQueryString(),
   );
 
   // If an ID was found, create a WebMap instance

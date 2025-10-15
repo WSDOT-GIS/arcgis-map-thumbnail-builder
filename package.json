@@ -9,7 +9,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "test": "vitest run"
+    "test": "vitest run",
+    "lint": "oxlint --type-aware"
   },
   "repository": {
     "type": "git",
@@ -28,16 +29,16 @@
   },
   "homepage": "https://github.com/WSDOT-GIS/arcgis-map-thumbnail-builder#readme",
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^6.15.0",
-    "@typescript-eslint/parser": "^6.15.0",
+    "@prettier/plugin-oxc": "^0.0.4",
+    "@types/bun": "latest",
     "browserslist-to-esbuild": "^1.2.0",
     "cspell": "^9.2.1",
-    "eslint": "^8.56.0",
+    "oxlint": "^1.23.0",
+    "oxlint-tsgolint": "^0.2.0",
     "prettier": "^3.6.2",
     "typescript": "^5.9.3",
     "vite": "^7.1.10",
-    "vitest": "^3.2.4",
-    "@types/bun": "latest"
+    "vitest": "^3.2.4"
   },
   "dependencies": {
     "@arcgis/core": "^4.33.14",

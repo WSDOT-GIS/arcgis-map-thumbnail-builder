@@ -124,7 +124,7 @@ async function takeScreenshot() {
 
   // Get the canvas element by its ID and assert it as HTMLCanvasElement
   const screenshotCanvas = document.getElementById(
-    "screenshotCanvas"
+    "screenshotCanvas",
   ) as HTMLCanvasElement;
 
   // Get the 2D rendering context of the canvas
