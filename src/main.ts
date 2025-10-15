@@ -106,7 +106,7 @@ function addLayerToList(layer: __esri.Layer) {
   deleteButton.addEventListener("click", deleteLayer);
 
   const a = document.createElement("a");
-  if (isLayerWithUrl(layer)) {
+  if (isLayerWithUrl(layer) && layer.url) {
     a.href = layer.url;
     a.textContent = layer.url;
   }
